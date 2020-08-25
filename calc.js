@@ -9,3 +9,11 @@ const operate = ((a, b, operator) => {
     };
 });
 
+let str = '';
+const numButtons = document.querySelectorAll('.number');
+numButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        str += button.value;
+        document.getElementById('display-value').innerHTML = str;
+    });
+});
