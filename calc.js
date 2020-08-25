@@ -13,7 +13,19 @@ let str = '';
 const numButtons = document.querySelectorAll('.number');
 numButtons.forEach(button => {
     button.addEventListener('click', (e) => {
+        if (str != '') {
+            str = '';
+        }
         str += button.value;
         document.getElementById('display-value').innerHTML = str;
     });
 });
+
+let num1, num2, operator;
+const signButtons = document.querySelectorAll('.operator');
+signButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        num1 = str;
+        operator = button.value;
+    })
+})
