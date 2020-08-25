@@ -9,5 +9,3 @@ const operate = ((a, b, operator) => {
     };
 });
 
-const container = document.querySelector('.container');
-const 
