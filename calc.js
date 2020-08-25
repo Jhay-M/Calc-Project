@@ -28,9 +28,18 @@ let num1, num2, sign;
 const signButtons = document.querySelectorAll('.operator');
 signButtons.forEach(button => {
     button.addEventListener('click', (e) => {
-        num1 = Number(str);
-        sign = button.value;
-        str = '';
+        if (num1 != undefined) {
+            num2 = Number(str);
+            let result = operate(num1, num2, sign);
+            document.getElementById('display-value').innerHTML = result;
+            num1 = result;
+            sign = button.value;
+            str = '';            
+        } else {
+            num1 = Number(str);
+            sign = button.value;
+            str = '';
+        }
     });
 });
 
