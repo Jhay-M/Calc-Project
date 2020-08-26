@@ -97,3 +97,12 @@ pointButton.addEventListener('click', (e) => {
         str = str;
     } else str += '.';
 });
+
+const eraseButton = document.querySelector('.backspace');
+eraseButton.addEventListener('click', (e) => {
+    let arr = str.split('');
+    arr.pop();
+    str = arr.join('');
+    document.getElementById('display-value').innerHTML = str;
+});
+

@@ -54,6 +54,10 @@ button.symbol {
     background-color: cyan;
 }
 
+button.backspace {
+    background-color: cyan;
+}
+
 .grid-head {
     border: 2px solid orangered;
     height: 94px;
