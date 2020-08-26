@@ -36,6 +36,7 @@ const clearCalc = (() => {
 });
 
 let str = '';
+const display = document.getElementById('display-value');
 const numButtons = document.querySelectorAll('.number');
 numButtons.forEach(button => {
     button.addEventListener('click', (e) => {
@@ -45,11 +46,14 @@ numButtons.forEach(button => {
 });
 
 let num1, num2, sign;
-let display = document.getElementById('display-value').innerHTML;
 const signButtons = document.querySelectorAll('.operator');
 signButtons.forEach(button => {
     button.addEventListener('click', (e) => {
-        if (num1 != undefined) {
+        if (num1 == undefined && num2 == undefined && sign != undefined) {
+            num1 = Number(display.textContent);
+            sign = button.value;
+            str = '';
+        } else if (num1 != undefined) {
             num2 = Number(str);
             let result = operate(num1, num2, sign);
             document.getElementById('display-value').innerHTML = result;
@@ -81,6 +85,7 @@ equalsButton.addEventListener('click', (e) => {
         str = '';
     }
     num1 = undefined;
+    num2 = undefined;
 });
 
 const clearButton = document.querySelector('.clear');
