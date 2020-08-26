@@ -5,14 +5,34 @@ const divide = ((a, b) => a/b);
 
 const operate = ((a, b, operator) => {
     if (operator == 'add') {
-        return add(a, b);
+        let result = add(a, b);
+        return roundNumber(result, 15);
     } else if (operator == 'subtract') {
-        return subtract(a, b);
+        let result = subtract(a, b);
+        return roundNumber(result, 15);
     } else if (operator == 'multiply') {
-        return multiply(a, b);
+        let result = multiply(a, b);
+        return roundNumber(result, 15);
     } else if (operator == 'divide') {
-        return divide(a, b);
+        if (b == 0) {
+            let result = 'Nice Try Wise-guy';
+            return result;
+        }
+        let result = divide(a, b);
+        return roundNumber(result, 15);
     };
+});
+
+const roundNumber = ((num, dec) => {
+    return Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec);
+});
+
+const clearCalc = (() => {
+    str = '';
+    num1 = undefined;
+    num2 = undefined;
+    sign = undefined;
+    document.getElementById('display-value').innerHTML = '';
 });
 
 let str = '';
@@ -25,6 +45,7 @@ numButtons.forEach(button => {
 });
 
 let num1, num2, sign;
+let display = document.getElementById('display-value').innerHTML;
 const signButtons = document.querySelectorAll('.operator');
 signButtons.forEach(button => {
     button.addEventListener('click', (e) => {
@@ -45,8 +66,29 @@ signButtons.forEach(button => {
 
 const equalsButton = document.querySelector('.equals');
 equalsButton.addEventListener('click', (e) => {
-    num2 = Number(str);
-    let result = operate(num1, num2, sign);
-    document.getElementById('display-value').innerHTML = result;
-    str = '';
+    if (!num1) {
+        let result = str;
+        document.getElementById('display-value').innerHTML = result;
+        str = '';
+    } else if (str == '') {
+        let result = num1;
+        document.getElementById('display-value').innerHTML = result;
+        str = '';
+    } else {
+        num2 = Number(str);
+        let result = operate(num1, num2, sign);
+        document.getElementById('display-value').innerHTML = result;
+        str = '';
+    }
+    num1 = undefined;
+});
+
+const clearButton = document.querySelector('.clear');
+clearButton.addEventListener('click', clearCalc);
+
+const pointButton = document.querySelector('.symbol');
+pointButton.addEventListener('click', (e) => {
+    if (str.includes('.')) {
+        str = str;
+    } else str += '.';
 });
